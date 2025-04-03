@@ -1,0 +1,21 @@
+class Node: 
+    def __init__(self, value): 
+        self.value = value 
+        self.left = None 
+        self.right = None 
+def is_valid_bst(root): 
+    def validate(node, low, high): 
+        if not node: 
+            return True 
+        if node.value <= low or node.value >= high: 
+            return False 
+        return (validate(node.left, low, node.value) and validate(node.right, node.value, high)) 
+    return validate(root, float('-inf'), float('inf')) 
+root = Node(10) 
+root.left = Node(5) 
+root.right = Node(15) 
+print(is_valid_bst(root)) 
+root = Node(10) 
+root.left = Node(15) 
+root.rigth = Node(5) 
+print(is_valid_bst(root))
