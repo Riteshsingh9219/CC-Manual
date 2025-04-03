@@ -1,0 +1,73 @@
+class TreeNode: 
+    def __init__(self, val=0, left=None, right=None): 
+        self.val = val 
+        self.left = left 
+        self.right = right 
+ 
+def is_leaf(node): 
+    """Check if a node is a leaf node.""" 
+    return node.left is None and node.right is None 
+ 
+def left_boundary(root, result): 
+    """Traverse the left boundary.""" 
+    if root is None or is_leaf(root): 
+        return 
+    result.append(root.val) 
+    if root.left: 
+        left_boundary(root.left, result) 
+    else: 
+        left_boundary(root.right, result) 
+ 
+def right_boundary(root, result): 
+    """Traverse the right boundary.""" 
+    if root is None or is_leaf(root): 
+        return 
+    if root.right: 
+        right_boundary(root.right, result) 
+    else: 
+        right_boundary(root.left, result) 
+
+    result.append(root.val)  
+def leaf_nodes(root, result): 
+    """Traverse and collect all leaf nodes.""" 
+    if root is None: 
+        return 
+    if is_leaf(root): 
+        result.append(root.val) 
+        return 
+    leaf_nodes(root.left, result) 
+    leaf_nodes(root.right, result) 
+ 
+def boundary_traversal(root): 
+    """Perform boundary traversal of the BST.""" 
+    if root is None: 
+        return [] 
+     
+    result = [] 
+     
+    # Add root if it's not a leaf 
+    if not is_leaf(root): 
+        result.append(root.val) 
+     
+    # Traverse left boundary 
+    left_boundary(root.left, result) 
+     
+    # Traverse leaf nodes 
+    leaf_nodes(root, result) 
+      
+# Traverse right boundary 
+right_boundary(root.right, result) 
+return result 
+# Example usage 
+if __name__ == "__main__": 
+# Construct a BST 
+root = TreeNode(20) 
+root.left = TreeNode(8) 
+root.left.left = TreeNode(4) 
+root.left.right = TreeNode(12) 
+root.left.right.left = TreeNode(10) 
+root.left.right.right = TreeNode(14) 
+root.right = TreeNode(22) 
+root.right.right = TreeNode(25) 
+# Perform boundary traversal 
+print("Boundary Traversal:", boundary_traversal(root))
