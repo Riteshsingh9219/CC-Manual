@@ -1,0 +1,28 @@
+class PriorityQueue : 
+def __init__(self) : 
+self.array = [] 
+def is_empty(self) : 
+return not self.array 
+
+    def enqueue(self, data, priority) : 
+        self.array.append((data, priority)) 
+        self.array.sort(key = lambda x : x[1]) 
+    def dequeue(self) : 
+        if self.is_empty() : 
+            print("Queue is underflowing") 
+            return None 
+        return self.array.pop(0)[0] 
+pq = PriorityQueue() 
+pq.enqueue(10,5) 
+pq.enqueue(12,2) 
+pq.enqueue(13,1) 
+pq.enqueue(7,3) 
+pq.enqueue(54,4) 
+elements = []  
+while not pq.is_empty(): 
+    elements.append(pq.dequeue())     
+if len(elements) < 3 : 
+    print("Not enough element") 
+else : 
+     product = elements[-1] * elements[-2] * elements[-3] 
+     print(f"Product of the largest number is {product}") 
