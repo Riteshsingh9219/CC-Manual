@@ -1,0 +1,40 @@
+class Node: 
+    def __init__(self, key): 
+        self.left = None 
+        self.right = None 
+        self.val = key 
+ 
+# Function to insert a new node with the given key 
+
+def insert(root, key): 
+    if root is None: 
+        return Node(key) 
+    else: 
+        if root.val < key: 
+            root.right = insert(root.right, key) 
+        else: 
+            root.left = insert(root.left, key) 
+    return root 
+ 
+# Function to do in-order traversal of BST 
+
+def inorder_traversal(root): 
+    if root: 
+        inorder_traversal(root.left) 
+        print(root.val, end=" ") 
+        inorder_traversal(root.right) 
+ 
+# Function to build BST from a list of integers 
+
+def build_bst(elements): 
+    root = None 
+
+for element in elements: 
+root = insert(root, element) 
+return root 
+# Example usage 
+if __name__ == "__main__": 
+elements = [50, 30, 20, 40, 70, 60, 80] 
+root = build_bst(elements) 
+print("In-order traversal of the constructed BST:") 
+inorder_traversal(root) 
